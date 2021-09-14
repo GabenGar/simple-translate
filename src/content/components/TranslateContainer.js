@@ -11,6 +11,9 @@ const translateText = async (text, targetLang = getSettings("targetLang")) => {
   return result;
 };
 
+/**
+ * @param {string} selectedText 
+ */
 const matchesTargetLang = async selectedText => {
   const targetLang = getSettings("targetLang");
   //detectLanguageで判定
@@ -40,6 +43,7 @@ export default class TranslateContainer extends Component {
       shouldShowPanel: false,
       panelPosition: { x: 0, y: 0 },
       currentLang: getSettings("targetLang"),
+      sourceLang : "",
       resultText: "",
       candidateText: "",
       statusText: "OK"
@@ -99,7 +103,8 @@ export default class TranslateContainer extends Component {
       resultText: result.resultText,
       candidateText: getSettings("ifShowCandidate") ? result.candidateText : "",
       statusText: result.statusText,
-      currentLang: shouldSwitchSecondLang ? secondLang : targetLang
+      currentLang: shouldSwitchSecondLang ? secondLang : targetLang,
+      sourceLang: result.sourceLanguage
     });
   };
 
@@ -120,6 +125,7 @@ export default class TranslateContainer extends Component {
           position={this.state.panelPosition}
           selectedText={this.selectedText}
           currentLang={this.state.currentLang}
+          sourceLang={this.state.sourceLang}
           resultText={this.state.resultText}
           candidateText={this.state.candidateText}
           statusText={this.state.statusText}

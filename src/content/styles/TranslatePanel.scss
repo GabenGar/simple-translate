@@ -37,8 +37,15 @@
         cursor: grab;
       }
 
-      .simple-translate-result-contents {
+      .simple-translate-original-language-info {
         padding: 0px 18px 15px;
+        margin : 0;
+        font-family: "Segoe UI", "San Francisco", "Ubuntu", "Fira Sans", "Roboto", "Arial", "Helvetica", sans-serif !important;
+        border-bottom: 0.125em solid var(--simple-translate-line);
+      }
+
+      .simple-translate-result-contents {
+        padding: 15px 18px 15px;
         p,
         a {
           all: initial;

@@ -43,6 +43,9 @@ const sendRequest = (word, sourceLang, targetLang) => {
   });
 };
 
+/**
+ * @param {GoogleTranslateAPI.Result} result 
+ */
 const formatResult = result => {
   const resultData = {
     resultText: "",
@@ -76,6 +79,12 @@ const formatResult = result => {
   return resultData;
 };
 
+/** 
+ * @param {string} sourceWord
+ * @param {string} [sourceLang]
+ * @param {string} targetLang
+ * @returns {Promise<FormattedResult>}
+ */
 export default async (sourceWord, sourceLang = "auto", targetLang) => {
   log.log(logDir, "tranlate()", sourceWord, targetLang);
   sourceWord = sourceWord.trim();

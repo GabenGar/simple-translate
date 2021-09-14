@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { getSettings } from "src/settings/settings";
 import getErrorMessage from "src/common/getErrorMessage";
+import { translateLangCode } from "src/common/translateLangCode";
 import "../styles/TranslatePanel.scss";
 
 const splitLine = text => {
@@ -163,7 +164,7 @@ export default class TranslatePanel extends Component {
   };
 
   render = () => {
-    const { shouldShow, selectedText, currentLang, resultText, candidateText, statusText } = this.props;
+    const { shouldShow, selectedText, currentLang, resultText, candidateText, statusText, sourceLang } = this.props;
     const isError = statusText !== "OK";
     const { width, height } = this.state.shouldResize
       ? { width: parseInt(getSettings("width")), height: parseInt(getSettings("height")) }
@@ -186,7 +187,7 @@ export default class TranslatePanel extends Component {
     const candidateStyles = {
       color: getSettings("candidateFontColor")
     };
-
+    
     return (
       <div
         className={`simple-translate-panel ${shouldShow ? "isShow" : ""}`}
@@ -195,7 +196,22 @@ export default class TranslatePanel extends Component {
       >
         <div className="simple-translate-result-wrapper" ref="wrapper" style={wrapperStyles}>
           <div className="simple-translate-move" draggable="true" ref="move"></div>
+          <p className="simple-translate-original-language-info"
+          style={resultStyles} dir="auto">
+            {sourceLang && (
+              <>
+                <span>
+                  {browser.i18n.getMessage("textLangOriginal")}{": "}
+                </span>
+                <span>
+                  {translateLangCode(sourceLang)}
+                </span>
+              </>
+            )}
+          </p>
+          
           <div className="simple-translate-result-contents">
+            
             <p className="simple-translate-result" style={resultStyles} dir="auto">
               {splitLine(resultText)}
             </p>
